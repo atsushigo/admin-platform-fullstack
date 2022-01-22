@@ -32,6 +32,25 @@ app.post("/api/articles", async (req, res) => {
     res.send(article)
 })
 
+app.delete("/api/articles/:id",async(req,res)=>{
+    await Article.findByIdAndDelete(req.params.id)
+    res.send({
+        status:true
+    })
+})
+
+//文章詳情
+app.get("/api/articles/:id",async(req,res)=>{
+    const article = await Article.findById(req.params.id)
+    res.send(article)
+})
+
+//修改文章
+app.put("/api/articles/:id",async(req,res)=>{
+    const article = Article.findByIdAndUpdate(req.params.id,req.body)
+    res.send(article)
+})
+
 app.listen(3001, () => {
     console.log("listening good")
 })
